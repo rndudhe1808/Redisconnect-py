@@ -1,0 +1,17 @@
+#install packages
+pip install redis python-decouple
+
+echo "REDIS_HOST=clustercfg.mytestcluster.XXXXXX.use1.cache.amazonaws.com" >> .env
+echo "REDIS_PORT=6379" >> .env
+cat .env
+REDIS_HOST=clustercfg.mytestcluster.XXXXXX.use1.cache.amazonaws.com
+REDIS_PORT=6379
+
+aws cli to create 
+
+aws elasticache create-cache-cluster --cluster-name "elasticache-redis-cluster" \ 
+  --description "ElastiCache for Redis with Cluster Mode Enabled" --num-shards 1 \ 
+  --num-replicas-per-shard 1 --security-group-ids example-security-group-id \ 
+  --subnet-group-name "subnet-group-redis-cluster-mode-enabled" \
+  --node-type "db.r6g.large" \
+  --snapshot-retention-limit 1
